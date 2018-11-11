@@ -36,6 +36,10 @@
             <!--千米maven的远程仓库即中央仓库-->
             <id>central</id>
             <url> http://nexus.dev.qianmi.com/nexus/content/groups/public </url>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </releases>
             <!--禁止从公共仓库下载snapshot构件-->
             <snapshots>
                 <enabled>false</enabled>
