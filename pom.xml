@@ -11,7 +11,7 @@
     <parent>
         <artifactId>autotest</artifactId>
         <groupId>com.qianmi</groupId>
-        <version>1.0.1-RELEASE</version>
+        <version>1.0.0-RELEASE</version>
     </parent>
 
 
@@ -21,27 +21,34 @@
             <artifactId>autotest-h5-framework</artifactId>
             <version>1.0.6-RELEASE</version>
         </dependency>
+
+
     </dependencies>
     <repositories>
         <repository>
+            <!--不懂这边什么意思-->
             <id>ofpay-snapshots</id>
             <name>intranet public snapshots</name>
             <url> http://nexus.dev.qianmi.com/nexus/content/repositories/snapshots </url>
             <snapshots> <updatePolicy>always</updatePolicy> </snapshots>
         </repository>
         <repository>
+            <!--千米maven的远程仓库即中央仓库-->
             <id>central</id>
             <url> http://nexus.dev.qianmi.com/nexus/content/groups/public </url>
+            <!--禁止从公共仓库下载snapshot构件-->
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
         </repository>
     </repositories>
+
     <build>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <!--为什么要加configuration-->
                 <configuration>
                     <mainClass>com.qianmi.autotest.h5.AutotestH5Application</mainClass>
                 </configuration>
@@ -74,5 +81,35 @@
             </plugin>
         </plugins>
     </build>
+
+    <!--&lt;!&ndash;添加testng.xml文件在构建时运行&ndash;&gt;-->
+    <!--<build>-->
+        <!--<plugins>-->
+            <!--<plugin>-->
+                <!--<groupId>org.apache.maven.plugins</groupId>-->
+                <!--<artifactId>maven-compiler-plugin</artifactId>-->
+                <!--<configuration>-->
+                    <!--<encoding>UTF-8</encoding>-->
+                <!--</configuration>-->
+            <!--</plugin>-->
+
+            <!--<plugin>-->
+                <!--<groupId>org.apache.maven.plugins</groupId>-->
+                <!--<artifactId>maven-surefire-plugin</artifactId>-->
+                <!--<version>2.18.1</version>-->
+
+
+
+                <!--<configuration>-->
+                    <!--&lt;!&ndash;<testFailureIgnore>true</testFailureIgnore>&ndash;&gt;-->
+                    <!--<suiteXmlFiles>-->
+                        <!--<suiteXmlFile>testng.xml</suiteXmlFile>-->
+                        <!--&lt;!&ndash;此处testng.xml即为要运行的testng.xml文件&ndash;&gt;-->
+                    <!--</suiteXmlFiles>-->
+                <!--</configuration>-->
+            <!--</plugin>-->
+        <!--</plugins>-->
+
+    <!--</build>-->
 
 </project>
