@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>d2p_wechat</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <!--项目父工程-->
+    <parent>
+        <artifactId>autotest</artifactId>
+        <groupId>com.qianmi</groupId>
+        <version>1.0.0-RELEASE</version>
+    </parent>
+
+
+    <dependencies>
+        <dependency>
+            <groupId>com.qianmi</groupId>
+            <artifactId>autotest-h5-framework</artifactId>
+            <version>1.0.6-RELEASE</version>
+        </dependency>
+    </dependencies>
+    <repositories>
+        <repository>
+            <id>ofpay-snapshots</id>
+            <name>intranet public snapshots</name>
+            <url> http://nexus.dev.qianmi.com/nexus/content/repositories/snapshots </url>
+            <snapshots> <updatePolicy>always</updatePolicy> </snapshots>
+        </repository>
+        <repository>
+            <id>central</id>
+            <url> http://nexus.dev.qianmi.com/nexus/content/groups/public </url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>com.qianmi.autotest.h5.AutotestH5Application</mainClass>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.springframework</groupId>
+                        <artifactId>springloaded</artifactId>
+                        <version>1.2.5.RELEASE</version>
+                    </dependency>
+                </dependencies>
+                <executions>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>com.ofpay</groupId>
+                <artifactId>maven-ofpaybuild-plugins</artifactId>
+                <version>1.2.6-RELEASE</version>
+                <executions>
+                    <execution>
+                        <id>notify-bugatti</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>notify-bugatti</goal>
+                        </goals>
+                        <configuration>
+                            <projectName>autotest_d2p_wx</projectName>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
