@@ -46,9 +46,9 @@ public class SkuTest extends PageTest {
                 .add_goods_cart()
                 .add_goods_cart_login()
                 .login_shop_list(telephone,pwd)
-                .search_selected_shop(shop_name)
-                .return_homePage()
-                .click_cart_button()
+//                .search_selected_shop(shop_name)
+//                .return_homePage()
+//                .click_cart_button()
                 ;
     }
 
