@@ -3,6 +3,7 @@ package com.qianmi.autotest.ui.h5.page;
 
 import com.qianmi.autotest.base.page.AppLoginPage;
 import com.qianmi.autotest.h5.page.BasePage;
+import io.appium.java_client.android.AndroidKeyCode;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.springframework.stereotype.Component;
@@ -26,7 +27,7 @@ public class LoginPage extends BasePage implements AppLoginPage {
 
     /*
        输入手机号和密码登录
-       点击登录
+
      */
     @Override
     public void  login(String telephone, String pwd){
@@ -34,8 +35,9 @@ public class LoginPage extends BasePage implements AppLoginPage {
         sleepInMillTime(2000);
         wait(usernameField).sendKeys(telephone);
         wait(passwordField).sendKeys(pwd);
-        driver.hideKeyboard();
-        refactClick(wait(submitButton));
+//        driver.hideKeyboard();
+//        refactClick(wait(submitButton));
+        wait(submitButton).click();
      }
    /*
     登录点击后跳转选择店铺列表页
@@ -45,8 +47,10 @@ public class LoginPage extends BasePage implements AppLoginPage {
         sleepInMillTime(2000);
         wait(usernameField).sendKeys(telephone);
         wait(passwordField).sendKeys(pwd);
-        driver.hideKeyboard();
-        refactClick(wait(submitButton));
+
+//        driver.hideKeyboard();
+//        refactClick(wait(submitButton));
+        wait(submitButton).click();
         sleepInMillTime(2000);
         return gotoPage(SelectedShopPage.class);
     }
