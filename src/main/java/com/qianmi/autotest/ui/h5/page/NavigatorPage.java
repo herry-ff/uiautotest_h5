@@ -1,15 +1,22 @@
 package com.qianmi.autotest.ui.h5.page;
 
 
-import com.qianmi.autotest.h5.page.BasePage;
+
+import com.qianmi.autotest.html5.page.Html5Page;
+import io.appium.java_client.TouchAction;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.springframework.stereotype.Component;
+
+import java.time.Duration;
 
 /**
  * Created by shifangfang on 18/10/12.
  */
+@Component
+public abstract class NavigatorPage extends Html5Page {
 
-public abstract class NavigatorPage extends BasePage{
+
     /**
      * 工具条首页按钮
      */
@@ -45,16 +52,20 @@ public abstract class NavigatorPage extends BasePage{
      *
      * @return 登录页
      */
+
+
     public LoginPage gotoLoginPage() {
-        sleepInMillTime(3000);
+        sleepInMillTime(1000);
         wait(userbutton).click();
         return gotoPage(LoginPage.class);
     }
-    /*
-    点击采购车图标进入采购车页面
+
+    /**已登录
+     * 点击更多跳转登录页
      */
-    public CartPage click_cart_button(){
-        click(cartButton);
-        return gotoPage(CartPage.class);
+    public MorePage click_more(){
+        sleepInMillTime(1000);
+        clickByNativeWebViewPosition(wait(userbutton));
+        return gotoPage(MorePage.class);
     }
 }

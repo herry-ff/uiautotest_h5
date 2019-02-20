@@ -1,6 +1,7 @@
 package com.qianmi.autotest.ui.h5.page;
 
-import com.qianmi.autotest.h5.page.BasePage;
+
+import com.qianmi.autotest.html5.page.Html5Page;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.springframework.stereotype.Component;
@@ -9,7 +10,7 @@ import org.springframework.stereotype.Component;
  * Created by shifangfang on 18/11/9.
  */
 @Component
-public class HomeSearchPage extends BasePage{
+public class HomeSearchPage extends Html5Page {
 
     //【搜索栏】
     @FindBy(id = "goods-search:query-text")
