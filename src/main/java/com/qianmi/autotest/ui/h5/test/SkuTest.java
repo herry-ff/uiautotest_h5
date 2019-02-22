@@ -323,7 +323,79 @@ public class SkuTest extends Html5PageTest {
                 ;
     }
 
+    /**
+     * 场景12:订单列表再次购买
+     * 获取订单列表第一笔订单
+     * 点击订单列表再次购买
+     * 购物车去结算
+     * 提交订单
+     */
     @Test(priority = 11)
+    public void buyAgain(){
+        String tel = inputData.getProperty("telephone");
+        String pwd = inputData.getProperty("pwd");
+        String queryString = inputData.getProperty("productName1");
+        pageFacade.gotoPage(HomePage.class)
+                .home_search()
+                .search(queryString)
+                .check_result(queryString)
+                .add_goods_cart_login()
+                .login_goto_searchResultPage(tel,pwd)
+                .add_goods_cart()
+                .goto_GoodsDetails()
+                .goto_CartPage()
+                .click_cart()
+                .select_PayOnDelivery()
+                .submitOrderByOnDeliveryPay()
+                .backOrderList()
+                .orderBuyAgain()
+                .click_cart()
+                .select_PayOnDelivery()
+                .submitOrderByOnDeliveryPay()
+        ;
+
+    }
+
+    /**
+     * 场景13:订单详情再次购买
+     * 获取订单列表第一笔订单
+     * 点击进入订单详情的再次购买
+     * 购物车去结算
+     * 提交订单
+     */
+    @Test(priority = 12)
+    public void detailBuyAgain(){
+        String tel = inputData.getProperty("telephone");
+        String pwd = inputData.getProperty("pwd");
+        String queryString = inputData.getProperty("productName1");
+        pageFacade.gotoPage(HomePage.class)
+                .home_search()
+                .search(queryString)
+                .check_result(queryString)
+                .add_goods_cart_login()
+                .login_goto_searchResultPage(tel,pwd)
+                .add_goods_cart()
+                .goto_GoodsDetails()
+                .goto_CartPage()
+                .click_cart()
+                .select_PayOnDelivery()
+                .submitOrderByOnDeliveryPay()
+                .backOrderList()
+                .orderDetailBuyAgain()
+                .clickBuyAgain()
+                .click_cart()
+                .select_PayOnDelivery()
+                .submitOrderByOnDeliveryPay()
+        ;
+
+    }
+
+
+    /**
+     * 调试忽略
+     */
+
+    @Test(priority = 12)
     public void getOrder(){
         String tel = inputData.getProperty("telephone");
         String pwd = inputData.getProperty("pwd");
