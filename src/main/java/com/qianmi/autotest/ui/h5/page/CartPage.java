@@ -23,21 +23,24 @@ public class CartPage extends Html5Page {
     private WebElement btn_cart;
 
     /*
+    数量输入框
+     */
+    @FindBy()
+    private WebElement inputNumber;
+
+    /*
       classname返回多个元素
       校验价格
       校验数量
      */
 
 
-    public CartPage verify_Goods(String name,String num,String price){
+    public CartPage verify_Goods(String name,String num){
 
         List<WebElement> els= driver.findElements(By.className("cart-main"));
         sleepInMillTime(1000);
         for (WebElement i:els) {
             if(i.getText().equals(name)){
-               if(i.findElements(By.className("good-price")).get(0).equals(price))
-                   System.out.print("会员价校验通过");
-//               if(Float(i.findElements(By.tagName("input")).get(0).getAttribute("value"))==(num))
               if(i.findElements(By.className("amount carAmount")).get(0).equals(num))
                 System.out.print("购买数量校验通过");
 
@@ -77,19 +80,27 @@ public class CartPage extends Html5Page {
         return gotoPage(ConfirmOrderPage.class);
     }
 
-    public CartPage modifyGoodsNum(String name,String num){
+    /**
+     * 修改商品数量
+     * @param name
+     * @param num
+     * @return
+     */
+
+    public CartPage modifyNumber(String name,String num){
 
         List<WebElement> els= driver.findElements(By.className("cart-main"));
 
         sleepInMillTime(1000);
         for (WebElement i:els) {
             if(i.getText().equals(name)){
-                WebElement el=i.findElement(By.className("amount carAmount"));
+                WebElement el=i.findElement(By.tagName("input"));
                 wait(el).sendKeys(num);
             }
             break;
         }
-        return this;
+
+    return this;
     }
 
 }
