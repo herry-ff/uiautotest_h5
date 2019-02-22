@@ -11,9 +11,20 @@ public class OrderDetailPage extends Html5Page {
     @FindBy(id = "qm-operations:buy-again-btn")
     private WebElement buyAgainBtn;
 
+    //取消订单按钮
+    @FindBy(id = "qm-operations:cancel-btn")
+    private WebElement cancelOrderBtn;
+
     public CartPage clickBuyAgain(){
         sleepInMillTime(2000);
         clickNativeElement(buyAgainBtn);
         return gotoPage(CartPage.class);
     }
+
+    public OrderPage cancelOrder(){
+        sleepInMillTime(2000);
+        clickNativeElement(cancelOrderBtn);
+        return gotoPage(OrderPage.class);
+    }
+
 }

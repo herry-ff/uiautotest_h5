@@ -288,7 +288,8 @@ public class SkuTest extends Html5PageTest {
     }
 
     /*
-   场景11:搜索商品
+   场景11:订单列表取消订单
+        搜索商品
         跳转登录,去登录
         输入手机号密码登录进入店铺列表跳转搜索结果列表页
         加入购物车
@@ -322,6 +323,8 @@ public class SkuTest extends Html5PageTest {
                 .cancelOrder()
                 ;
     }
+
+
 
     /**
      * 场景12:订单列表再次购买
@@ -381,7 +384,7 @@ public class SkuTest extends Html5PageTest {
                 .select_PayOnDelivery()
                 .submitOrderByOnDeliveryPay()
                 .backOrderList()
-                .orderDetailBuyAgain()
+                .orderDetail()
                 .clickBuyAgain()
                 .click_cart()
                 .select_PayOnDelivery()
@@ -391,24 +394,43 @@ public class SkuTest extends Html5PageTest {
     }
 
 
-    /**
-     * 调试忽略
-     */
-
-    @Test(priority = 12)
-    public void getOrder(){
+    /*
+ 场景14:订单详情取消订单
+      搜索商品
+      跳转登录,去登录
+      输入手机号密码登录进入店铺列表跳转搜索结果列表页
+      加入购物车
+      进入商品详情页
+      进入购物车页面
+      使用货到付款
+      提交订单
+      进入订单详情页
+      取消订单
+  */
+    @Test(priority = 13)
+    public void detailCancelOrder(){
+        logger.info("*************************** cancelOrder start");
         String tel = inputData.getProperty("telephone");
         String pwd = inputData.getProperty("pwd");
         String queryString = inputData.getProperty("productName1");
         pageFacade.gotoPage(HomePage.class)
-                .gotoLoginPage()
-                .login_homePage(tel,pwd)
-                .gotoOrderPage()
-                .clickSearch()
-                .searchOrder()
+                .home_search()
+                .search(queryString)
+                .check_result(queryString)
+                .add_goods_cart_login()
+                .login_goto_searchResultPage(tel,pwd)
+                .add_goods_cart()
+                .goto_GoodsDetails()
+                .goto_CartPage()
+                .click_cart()
+                .select_PayOnDelivery()
+                .submitOrderByOnDeliveryPay()
+                .backOrderList()
+                .orderDetail()
                 .cancelOrder()
-                ;
-
+        ;
     }
+
+
 
 }

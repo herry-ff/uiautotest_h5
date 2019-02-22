@@ -35,19 +35,19 @@ public class OrderPage extends Html5Page {
         sleepInMillTime(2000);
         List<WebElement> orders = driver.findElements(By.className("order-list-content"));
         WebElement el = orders.get(0);
-        WebElement el2 = el.findElement(By.id("qm-operations:buy-again-btn"));
+        WebElement el2 = el.findElement(By.cssSelector("[class=\"btn btn-ghost\"]"));
         System.out.print("开始打印"+el2);
         //元素通过坐标定位不到
-        //clickByNativeWebViewPosition(el2);
+        clickNativeElement(el2);
         return gotoPage(CartPage.class);
     }
 
 
     /**
-     *订单详情再次购买
+     *点击商品图片进入订单详情
      */
 
-    public OrderDetailPage orderDetailBuyAgain(){
+    public OrderDetailPage orderDetail(){
 
         sleepInMillTime(2000);
         List<WebElement> orders = driver.findElements(By.className("order-list-content"));
