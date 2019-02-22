@@ -27,6 +27,7 @@ public class HomePage extends NavigatorPage{
      */
     public HomeSearchPage home_search() {
         sleepInMillTime(1000);
+        swipeUp(2000);
         wait(searchInput).click();
         return gotoPage(HomeSearchPage.class);
     }
@@ -40,7 +41,8 @@ public class HomePage extends NavigatorPage{
         sleepInMillTime(1000);
         swipeUp(1000);
         sleepInMillTime(1000);
-        clickByNativeWebViewPosition(wait(cartButton));
+        clickByNativePosition(wait(cartButton));
+       // clickNativeElement(wait(cartButton));
         return gotoPage(LoginPage.class);
     }
 

@@ -90,8 +90,7 @@ public class SearchResultPage extends Html5Page {
      * 点击商品图片进入商品详情页面
      */
     public GoodsDetails goto_GoodsDetails() {
-        sleepInMillTime(1000);
-        swipeUp(2000);
+        sleepInMillTime(2000);
         clickByNativeWebViewPosition(wait(result_goods_pic));
         return gotoPage(GoodsDetails.class);
     }

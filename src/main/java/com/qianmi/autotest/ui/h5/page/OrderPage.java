@@ -10,22 +10,17 @@ import org.springframework.stereotype.Component;
  * Created by shifangfang on 18/12/5.
  */
 @Component
-public class OrderPage extends OrderSuccessPage {
+public class OrderPage extends Html5Page {
  /**
  * 搜索框
  */
     @FindBy(id = "goods-search:query-text")
     private WebElement searchOrder;
 
-    /**
-     *订单号输入框输入获取到的订单号
-     *按下搜索
-     * @return
-     */
-  public SearchOrderPage searchOrderResult(){
-      wait(searchOrder).sendKeys(getOrderNo());
-      pressEnterKey(searchOrder);
-      return gotoPage(SearchOrderPage.class);
-  }
+    public SearchOrderPage clickSearch(){
+        clickNativeElement(searchOrder);
+        return gotoPage(SearchOrderPage.class);
+    }
+
 
 }

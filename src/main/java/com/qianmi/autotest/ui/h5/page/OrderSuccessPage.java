@@ -14,6 +14,10 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class OrderSuccessPage extends Html5Page {
+    private String orderNo;
+
+
+
     /**
      * 订单列表返回按钮
      */
@@ -25,8 +29,8 @@ public class OrderSuccessPage extends Html5Page {
      * 点击订单列表按钮返回订单列表
      */
      public OrderPage backOrderList() {
-         sleepInMillTime(1000);
-         clickByNativeWebViewPosition(wait(orderListButton));
+         sleepInMillTime(2000);
+         clickNativeElement(wait(orderListButton));
          return gotoPage(OrderPage.class);
      }
 
@@ -35,9 +39,19 @@ public class OrderSuccessPage extends Html5Page {
      * @param
      * @return
      */
-    public String getOrderNo(){
-        WebElement el=driver.findElement(By.className("text-gray"));
-        String orderNo=el.findElements(By.tagName("li")).get(1).findElement(By.tagName("span")).getText();
+    public OrderSuccessPage getOrder(){
+        sleepInMillTime(2000);
+        WebElement el=driver.findElement(By.className("order-success-content")).findElements(By.tagName("li")).get(1);
+        String orderNo =el.findElement(By.tagName("span")).getText();
+        setOrderNo(orderNo);
+        return this;
+    }
+
+    public String getOrderNo() {
         return orderNo;
+    }
+
+    public void setOrderNo(String orderNo) {
+        this.orderNo = orderNo;
     }
 }

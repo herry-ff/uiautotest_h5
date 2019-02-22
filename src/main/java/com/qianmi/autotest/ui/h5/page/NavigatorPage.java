@@ -4,6 +4,7 @@ package com.qianmi.autotest.ui.h5.page;
 
 import com.qianmi.autotest.html5.page.Html5Page;
 import io.appium.java_client.TouchAction;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.springframework.stereotype.Component;
@@ -56,16 +57,35 @@ public abstract class NavigatorPage extends Html5Page {
 
     public LoginPage gotoLoginPage() {
         sleepInMillTime(1000);
-        wait(userbutton).click();
+        swipeUp(2000);
+       // System.out.print("开始打印"+cartButton);
+        sleepInMillTime(2000);
+        clickByNativePosition(cartButton);
+//        WebElement el=driver.findElement(By.className("nav")).findElements(By.tagName("li")).get(2);
+//        clickByNativePosition(el);
+
+
+
         return gotoPage(LoginPage.class);
     }
+
+    /**
+     * 已登录
+     * 点击订单
+     * 跳转订单列表
+     */
+    public OrderPage gotoOrderPage(){
+        clickByNativePosition(orderButton);
+        return gotoPage(OrderPage.class);
+    }
+
 
     /**已登录
      * 点击更多跳转登录页
      */
     public MorePage click_more(){
         sleepInMillTime(1000);
-        clickByNativeWebViewPosition(wait(userbutton));
+        clickNativeElement(wait(userbutton));
         return gotoPage(MorePage.class);
     }
 }

@@ -75,7 +75,7 @@ public class SkuTest extends Html5PageTest {
                 .goto_layer()
                 .inputDecimalAddCart(num)
                 .goto_CartPage()
-                .verify_Goods(queryString,num,price)
+                .verify_Goods(queryString,num)
                 ;
     }
 
@@ -107,7 +107,7 @@ public class SkuTest extends Html5PageTest {
                 .goto_layer()
                 .inputDecimalAddCart(num)
                 .goto_CartPage()
-                .verify_Goods(queryString,num,price)
+                .verify_Goods(queryString,num)
         ;
     }
  /*
@@ -127,7 +127,7 @@ public class SkuTest extends Html5PageTest {
         String pwd = inputData.getProperty("pwd");
         String name = inputData.getProperty("productName5");
         String unit = inputData.getProperty("productName5Unit");
-//        String shop_name = inputData.getProperty("shop_name");
+        String num = inputData.getProperty("productName5Number");
         pageFacade.gotoPage(HomePage.class)
                 .home_search()
                 .search(name)
@@ -137,6 +137,7 @@ public class SkuTest extends Html5PageTest {
                 .add_goods_cart()
                 .goto_GoodsDetails()
                 .goto_CartPage()
+                .modifyNumber(name,num)
                 .verify_Goods_unit(name,unit);
     }
 
@@ -166,7 +167,8 @@ public class SkuTest extends Html5PageTest {
                 .add_goods_cart()
                 .goto_GoodsDetails()
                 .goto_CartPage()
-                .modifyGoodsNum(name,num)
+                .modifyNumber(name,num)
+                .verify_Goods(name,num)
         ;
     }
     /*
@@ -185,13 +187,13 @@ public class SkuTest extends Html5PageTest {
             String tel = inputData.getProperty("telephone");
             String pwd = inputData.getProperty("pwd");
             String queryString = inputData.getProperty("productName1");
-//        String shop_name = inputData.getProperty("shop_name");
             pageFacade.gotoPage(HomePage.class)
                     .home_search()
                     .search(queryString)
                     .check_result(queryString)
                     .add_goods_cart_login()
                     .login_goto_searchResultPage(tel,pwd)
+                    .add_goods_cart()
                     .goto_GoodsDetails()
                     .goto_CartPage()
                     .click_cart()
@@ -220,7 +222,7 @@ public class SkuTest extends Html5PageTest {
         String addTel = inputData.getProperty("addressTel");
         String name = inputData.getProperty("addressName");
         pageFacade.gotoPage(HomePage.class)
-                .click_cart_login()
+                .gotoLoginPage()
                 .login_homePage(tel,pwd)
                 .click_more()
                 .clickAddressBtn()
@@ -252,7 +254,7 @@ public class SkuTest extends Html5PageTest {
         String addTel = inputData.getProperty("addressExportTel");
         String name = inputData.getProperty("addressExportName");
         pageFacade.gotoPage(HomePage.class)
-                .click_cart_login()
+                .gotoLoginPage()
                 .login_homePage(tel,pwd)
                 .click_more()
                 .clickAddressBtn()
@@ -286,7 +288,7 @@ public class SkuTest extends Html5PageTest {
     }
 
     /*
-   场景7:搜索商品
+   场景11:搜索商品
         跳转登录,去登录
         输入手机号密码登录进入店铺列表跳转搜索结果列表页
         加入购物车
@@ -302,28 +304,39 @@ public class SkuTest extends Html5PageTest {
         String tel = inputData.getProperty("telephone");
         String pwd = inputData.getProperty("pwd");
         String queryString = inputData.getProperty("productName1");
-        String orderNO = " ";
         pageFacade.gotoPage(HomePage.class)
                 .home_search()
                 .search(queryString)
                 .check_result(queryString)
                 .add_goods_cart_login()
                 .login_goto_searchResultPage(tel,pwd)
+                .add_goods_cart()
                 .goto_GoodsDetails()
                 .goto_CartPage()
                 .click_cart()
                 .select_PayOnDelivery()
                 .submitOrderByOnDeliveryPay()
                 .backOrderList()
-                .searchOrderResult()
+                .clickSearch()
+                .searchOrder()
                 .cancelOrder()
                 ;
     }
 
     @Test(priority = 11)
     public void getOrder(){
-        pageFacade.gotoPage(OrderSuccessPage.class)
-                .getOrderNo();
+        String tel = inputData.getProperty("telephone");
+        String pwd = inputData.getProperty("pwd");
+        String queryString = inputData.getProperty("productName1");
+        pageFacade.gotoPage(HomePage.class)
+                .gotoLoginPage()
+                .login_homePage(tel,pwd)
+                .gotoOrderPage()
+                .clickSearch()
+                .searchOrder()
+                .cancelOrder()
+                ;
+
     }
 
 }
