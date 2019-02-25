@@ -16,6 +16,7 @@
 
     <properties>
         <java.version>1.8</java.version>
+        <!--<selenium.version>3.12.0</selenium.version>-->
         <selenium.version>3.12.0</selenium.version>
         <appium.version>6.1.0</appium.version>
         <lombok.version>1.16.10</lombok.version>

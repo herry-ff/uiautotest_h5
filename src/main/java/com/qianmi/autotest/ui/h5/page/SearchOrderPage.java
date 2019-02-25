@@ -5,6 +5,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.springframework.stereotype.Component;
 
+import java.io.IOException;
+
 
 /**
  * Created by shifangfang on 19/2/15.
@@ -41,10 +43,18 @@ public class SearchOrderPage extends OrderSuccessPage {
      *按下搜索
      * @return
      */
-    public SearchOrderPage searchOrder(){
+    public SearchOrderPage searchOrder(String orderId){
         sleepInMillTime(2000);
-        wait(orderNO).sendKeys("TP1902211730324067");
-        pressEnterKey(orderNO);
+//        wait(orderNO).sendKeys(orderId);
+        wait(orderNO).sendKeys("TP1902231749441561");
+        String cmdstr="adb shell input keyevent 66";
+        try {
+            Runtime.getRuntime().exec(cmdstr).waitFor();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return gotoPage(SearchOrderPage.class);
     }
 }

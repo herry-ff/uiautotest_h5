@@ -8,6 +8,7 @@ import org.openqa.selenium.support.FindBy;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by shifangfang on 18/11/9.
@@ -19,7 +20,6 @@ public class CartPage extends Html5Page {
      * 去结算按钮
      */
     @FindBy(id = "shopping-cart:settle-up-btn")
-//      @FindBy(xpath = "//div[@class=\"footer footer-white\"]//a[@class=\"btn btn-primary btn-cart\"]")
     private WebElement btn_cart;
 
     /*
@@ -72,11 +72,32 @@ public class CartPage extends Html5Page {
     }
 
     /**
-     * 点击去结算按钮跳转确认订单页
+     * 正常下单
+     * 点击去结算按钮
+     * 跳转确认订单页
      */
     public ConfirmOrderPage click_cart(){
         sleepInMillTime(2000);
         clickByNativeWebViewPosition(wait(btn_cart));
+        return gotoPage(ConfirmOrderPage.class);
+    }
+
+    /**
+     * 再次购买进入购物车页面
+     * 点击去结算按钮
+     * @return
+     */
+    public ConfirmOrderPage gotoConfirmOrderPage() {
+        Set<String> contextNames = driver.getContextHandles();
+        sleepInMillTime(2000);
+        for (String context : contextNames) {
+            System.out.println(context);
+            if (context.contains("NATIVE_APP")) {
+                driver.context(context);
+                btn_cart.click();
+                break;
+            }
+        }
         return gotoPage(ConfirmOrderPage.class);
     }
 

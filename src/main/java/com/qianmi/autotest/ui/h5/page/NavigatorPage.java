@@ -10,6 +10,7 @@ import org.openqa.selenium.support.FindBy;
 import org.springframework.stereotype.Component;
 
 import java.time.Duration;
+import java.util.Set;
 
 /**
  * Created by shifangfang on 18/10/12.
@@ -61,10 +62,30 @@ public abstract class NavigatorPage extends Html5Page {
        // System.out.print("开始打印"+cartButton);
         sleepInMillTime(2000);
         clickByNativePosition(cartButton);
-//        WebElement el=driver.findElement(By.className("nav")).findElements(By.tagName("li")).get(2);
-//        clickByNativePosition(el);
 
 
+        return gotoPage(LoginPage.class);
+    }
+
+    /**
+     * 未登录点击更多跳转登录页
+     * @return
+     */
+    public LoginPage homePageLogin(){
+        Set<String> contextNames=driver.getContextHandles();
+        swipeUp(2000);
+        sleepInMillTime(2000);
+        for(String context : contextNames){
+//            System.out.println(context);
+            if (context.contains("NATIVE_APP")) {
+                driver.context(context);
+                //System.out.print(context);
+                sleepInMillTime(2000);
+                userbutton.click();
+                break;
+            }
+
+        }
 
         return gotoPage(LoginPage.class);
     }
@@ -75,17 +96,35 @@ public abstract class NavigatorPage extends Html5Page {
      * 跳转订单列表
      */
     public OrderPage gotoOrderPage(){
-        clickByNativePosition(orderButton);
+        Set<String> contextNames=driver.getContextHandles();
+        sleepInMillTime(2000);
+        for(String context : contextNames){
+            System.out.println(context);
+            if (context.contains("NATIVE_APP")) {
+                driver.context(context);
+                orderButton.click();
+                break;
+            }
+
+        }
         return gotoPage(OrderPage.class);
     }
 
 
     /**已登录
-     * 点击更多跳转登录页
+     * 点击更多跳转更多页面
      */
-    public MorePage click_more(){
-        sleepInMillTime(1000);
-        clickNativeElement(wait(userbutton));
+    public MorePage click_more() {
+        Set<String> contextNames = driver.getContextHandles();
+        sleepInMillTime(2000);
+        for (String context : contextNames) {
+            if (context.contains("NATIVE_APP")) {
+                driver.context(context);
+                orderButton.click();
+                break;
+            }
+
+        }
         return gotoPage(MorePage.class);
     }
 }

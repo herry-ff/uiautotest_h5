@@ -319,7 +319,7 @@ public class SkuTest extends Html5PageTest {
                 .submitOrderByOnDeliveryPay()
                 .backOrderList()
                 .clickSearch()
-                .searchOrder()
+                .searchOrder("")
                 .cancelOrder()
                 ;
     }
@@ -339,21 +339,12 @@ public class SkuTest extends Html5PageTest {
         String pwd = inputData.getProperty("pwd");
         String queryString = inputData.getProperty("productName1");
         pageFacade.gotoPage(HomePage.class)
-                .home_search()
-                .search(queryString)
-                .check_result(queryString)
-                .add_goods_cart_login()
-                .login_goto_searchResultPage(tel,pwd)
-                .add_goods_cart()
-                .goto_GoodsDetails()
-                .goto_CartPage()
-                .click_cart()
-                .select_PayOnDelivery()
-                .submitOrderByOnDeliveryPay()
-                .backOrderList()
+                .homePageLogin()
+                .login_homePage(tel,pwd)
+                .gotoOrderPage()
                 .orderBuyAgain()
-                .click_cart()
-                .select_PayOnDelivery()
+                .gotoConfirmOrderPage()
+                .selectCashOnDelivery()
                 .submitOrderByOnDeliveryPay()
         ;
 

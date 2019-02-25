@@ -37,7 +37,7 @@ public class LoginPage extends Html5Page implements AppLoginPage {
 
     public  HomePage  login_homePage(String telephone, String pwd){
         initPage(this);
-        sleepInMillTime(2000);
+        sleepInMillTime(1000);
         wait(usernameField).sendKeys(telephone);
         wait(passwordField).sendKeys(pwd);
 //        driver.hideKeyboard();

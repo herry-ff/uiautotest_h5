@@ -43,6 +43,7 @@ public class OrderSuccessPage extends Html5Page {
         sleepInMillTime(2000);
         WebElement el=driver.findElement(By.className("order-success-content")).findElements(By.tagName("li")).get(1);
         String orderNo =el.findElement(By.tagName("span")).getText();
+        System.out.print(orderNo);
         setOrderNo(orderNo);
         return this;
     }

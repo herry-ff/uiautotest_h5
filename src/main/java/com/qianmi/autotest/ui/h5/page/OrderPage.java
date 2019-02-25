@@ -21,6 +21,13 @@ public class OrderPage extends Html5Page {
     @FindBy(id = "goods-search:query-text")
     private WebElement searchOrder;
 
+    /**
+     * 取消订单按钮
+     *
+     */
+//    @FindBy(id = "qm-operations:cancel-btn")
+//    private WebElement cancelBtn;
+
     public SearchOrderPage clickSearch(){
         clickNativeElement(searchOrder);
         return gotoPage(SearchOrderPage.class);
@@ -33,12 +40,9 @@ public class OrderPage extends Html5Page {
     public CartPage orderBuyAgain(){
 
         sleepInMillTime(2000);
-        List<WebElement> orders = driver.findElements(By.className("order-list-content"));
-        WebElement el = orders.get(0);
-        WebElement el2 = el.findElement(By.cssSelector("[class=\"btn btn-ghost\"]"));
-        System.out.print("开始打印"+el2);
-        //元素通过坐标定位不到
-        clickNativeElement(el2);
+        List<WebElement> buyAgainButtons = driver.findElements(By.id("qm-operations:buy-again-btn"));
+        WebElement el = buyAgainButtons.get(0);
+        el.click();
         return gotoPage(CartPage.class);
     }
 
@@ -56,4 +60,22 @@ public class OrderPage extends Html5Page {
         clickByNativeWebViewPosition(el2);
        return gotoPage(OrderDetailPage.class);
     }
+
+    /**
+     *
+     */
+    /**
+     * 订单列表取消第一笔订单
+     * 待优化
+     */
+
+    public OrderPage cancelOrder(){
+
+        sleepInMillTime(2000);
+        List<WebElement> orders = driver.findElements(By.id("qm-operations:cancel-btn"));
+        WebElement el = orders.get(0);
+        el.click();
+        return this;
+    }
+
 }
