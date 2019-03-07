@@ -2,6 +2,7 @@ package com.qianmi.autotest.ui.h5.page;
 
 import com.qianmi.autotest.html5.page.Html5Page;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.springframework.stereotype.Component;
 
@@ -16,21 +17,21 @@ public class AddressInfoPage extends Html5Page {
 /**
  * 智能解析按钮
  */
-  @FindBy()
+  @FindBy(id = "analysis-address")
   private WebElement address_analysis;
 
   /**
    * 保存收货地址
    * @return
      */
-  @FindBy()
+  @FindBy(id = "save-address-btn")
   private WebElement save_address;
 
   /**
    * 导入店铺地址
    * @return
      */
-  @FindBy()
+  @FindBy(id = "import-address-btn")
   private WebElement export_address;
 
   /**
@@ -40,7 +41,14 @@ public class AddressInfoPage extends Html5Page {
 
   public AddressInfoPage clickAnalysis(){
 
-    clickByNativePosition(wait(address_analysis));
+    wait(address_analysis).click();
+
+    driver.context("CHROMIUM");
+    WebElement el = driver.findElementByClassName("address-title");
+    Actions actions = new Actions(driver);
+    actions.moveToElement(el).click().perform();
+
+
     return gotoPage(AddressInfoPage.class);
   }
 
@@ -54,7 +62,8 @@ public class AddressInfoPage extends Html5Page {
    * 返回收货地址页面
    */
   public AddressPage clickSaveAddress(){
-    clickByNativeWebViewPosition(wait(save_address));
+    sleepInMillTime(1000);
+    clickNativeElement(save_address);
     return gotoPage(AddressPage.class);
   }
 

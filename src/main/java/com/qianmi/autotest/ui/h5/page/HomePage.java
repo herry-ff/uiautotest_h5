@@ -32,19 +32,6 @@ public class HomePage extends NavigatorPage{
         return gotoPage(HomeSearchPage.class);
     }
 
-    /*
-    未登录
-    点击购物车图标
-    进入登录页
-     */
-    public LoginPage click_cart_login(){
-        sleepInMillTime(1000);
-        swipeUp(1000);
-        sleepInMillTime(1000);
-        clickByNativePosition(wait(cartButton));
-       // clickNativeElement(wait(cartButton));
-        return gotoPage(LoginPage.class);
-    }
 
     /*
    已登录

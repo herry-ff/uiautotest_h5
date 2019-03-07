@@ -17,14 +17,9 @@ public class AddressPage extends Html5Page {
     /**
      * 新增收货地址按钮
       */
-    @FindBy(id = "")
+    @FindBy(id = "add-address-btn")
     private WebElement addAddressBtn;
 
-    /**
-     * 删除收货地址确认弹框中确定按钮
-     */
-    @FindBy()
-    private WebElement confirmDelBtn;
 
 
     /**
@@ -33,9 +28,7 @@ public class AddressPage extends Html5Page {
      */
     public AddressInfoPage click_add_Address(){
         sleepInMillTime(1000);
-
-        clickByNativeWebViewPosition(wait(addAddressBtn));
-
+        wait(addAddressBtn).click();
         return gotoPage(AddressInfoPage.class);
     }
 
@@ -81,7 +74,14 @@ public class AddressPage extends Html5Page {
      */
     public AddressPage confirmDeleteAddress(){
         sleepInMillTime(1000);
-        clickByNativeWebViewPosition(wait(confirmDelBtn));
+        List<WebElement> els = driver.findElementsByClassName("am-modal-button");
+        for(WebElement i : els){
+            if(i.getText().equals("确定")){
+                i.click();
+                break;
+            }
+        }
+
         return gotoPage(AddressPage.class);
     }
 }

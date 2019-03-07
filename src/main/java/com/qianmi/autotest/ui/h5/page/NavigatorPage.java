@@ -49,44 +49,16 @@ public abstract class NavigatorPage extends Html5Page {
     @FindBy(id = "home:user-btn")
     protected WebElement userbutton;
 
-    /**
-     * 前往登录页面
-     *
-     * @return 登录页
-     */
-
-
-    public LoginPage gotoLoginPage() {
-        sleepInMillTime(1000);
-        swipeUp(2000);
-       // System.out.print("开始打印"+cartButton);
-        sleepInMillTime(2000);
-        clickByNativePosition(cartButton);
-
-
-        return gotoPage(LoginPage.class);
-    }
 
     /**
      * 未登录点击更多跳转登录页
      * @return
      */
     public LoginPage homePageLogin(){
-        Set<String> contextNames=driver.getContextHandles();
-        swipeUp(2000);
         sleepInMillTime(2000);
-        for(String context : contextNames){
-//            System.out.println(context);
-            if (context.contains("NATIVE_APP")) {
-                driver.context(context);
-                //System.out.print(context);
-                sleepInMillTime(2000);
-                userbutton.click();
-                break;
-            }
-
-        }
-
+        swipeUp(2000);
+        driver.context("NATIVE_APP");
+        userbutton.click();
         return gotoPage(LoginPage.class);
     }
 
@@ -97,7 +69,7 @@ public abstract class NavigatorPage extends Html5Page {
      */
     public OrderPage gotoOrderPage(){
         Set<String> contextNames=driver.getContextHandles();
-        sleepInMillTime(2000);
+        sleepInMillTime(3000);
         for(String context : contextNames){
             System.out.println(context);
             if (context.contains("NATIVE_APP")) {
@@ -110,21 +82,37 @@ public abstract class NavigatorPage extends Html5Page {
         return gotoPage(OrderPage.class);
     }
 
+    /**
+     * 已登录
+     * 点击采购车
+     * 跳转采购车
+     */
+    public CartPage gotoCartPage(){
+        Set<String> contextNames=driver.getContextHandles();
+        sleepInMillTime(3000);
+        for(String context : contextNames){
+            System.out.println(context);
+            if (context.contains("NATIVE_APP")) {
+                driver.context(context);
+                cartButton.click();
+                break;
+            }
+
+        }
+        return gotoPage(CartPage.class);
+    }
+
 
     /**已登录
      * 点击更多跳转更多页面
      */
     public MorePage click_more() {
-        Set<String> contextNames = driver.getContextHandles();
-        sleepInMillTime(2000);
-        for (String context : contextNames) {
-            if (context.contains("NATIVE_APP")) {
-                driver.context(context);
-                orderButton.click();
-                break;
-            }
 
-        }
+        sleepInMillTime(2000);
+
+        driver.context("NATIVE_APP");
+        userbutton.click();
+
         return gotoPage(MorePage.class);
     }
 }

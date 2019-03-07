@@ -6,6 +6,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.springframework.stereotype.Component;
 
+import java.util.Set;
+
 /**
  * Created by shifangfang on 19/1/6.
  */
@@ -14,8 +16,8 @@ public class GoodsDetails extends Html5Page {
     /**
      * 悬浮小购物车图标
      */
-//    @FindBy(className = "qIcon qIcon-cart1")
-    @FindBy(xpath = "//a[@class=\"back-home back-cart\"]//i[@class=\"qIcon qIcon-cart1\"]")
+
+   @FindBy(id = "back-home-back-cart")
     private WebElement cart_button;
     /*
       未登录,登录查看会员价图标id
@@ -32,8 +34,16 @@ public class GoodsDetails extends Html5Page {
     /**
      * 点击小购物车图标进入购物车页面
      */
-    public CartPage goto_CartPage(){
-        clickByNativeWebViewPosition(wait(cart_button));
+    public CartPage goto_CartPage() {
+        Set<String> contextNames = driver.getContextHandles();
+        for (String context : contextNames) {
+            if (context.contains("NATIVE_APP")) {
+                driver.context(context);
+                cart_button.click();
+                break;
+            }
+
+        }
         return gotoPage(CartPage.class);
     }
 

@@ -2,9 +2,13 @@ package com.qianmi.autotest.ui.h5.page;
 
 
 import com.qianmi.autotest.html5.page.Html5Page;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.springframework.stereotype.Component;
+
+import java.util.Set;
 
 /**
  * Created by shifangfang on 19/1/8.
@@ -20,7 +24,7 @@ public class GoodsDetailLayer extends Html5Page {
     /*
       确认采购按钮
      */
-    @FindBy(className = "btn btn-primary btn-cart")
+    @FindBy(id = "ensure-add-cart")
     private WebElement confirmAddCart;
 
     /*
@@ -28,9 +32,27 @@ public class GoodsDetailLayer extends Html5Page {
     点击确认采购
     返回商品详情页面
      */
-    public GoodsDetails inputDecimalAddCart(String decimal) {
-        wait(goodsNumber).sendKeys(decimal);
-        clickByNativeWebViewPosition(wait(confirmAddCart));
+    public GoodsDetails inputDecimalAddCart(String inputNum) {
+        wait(goodsNumber).clear();
+        wait(goodsNumber).sendKeys(inputNum);
+        WebElement el = driver.findElement(By.className("spec-title"));
+        Actions actions = new Actions(driver);
+        actions.moveToElement(el).click().perform();
+
+        Set<String> contextNames=driver.getContextHandles();
+
+
+        for(String context : contextNames) {
+            System.out.println(context);
+            if (context.contains("NATIVE_APP")) {
+                driver.context(context);
+                System.out.print(context);
+                confirmAddCart.click();
+                break;
+            }
+        }
+
+
         return gotoPage(GoodsDetails.class);
     }
 }
