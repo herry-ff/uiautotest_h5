@@ -75,8 +75,8 @@ public class SkuTest extends Html5PageTest {
                 .goto_layer()
                 .inputDecimalAddCart(num)
                 .goto_CartPage()
-                .verify_Goods(queryString,num)
-                ;
+                .modifyNumber(queryString,num)
+        ;
     }
 
     /*
@@ -168,7 +168,6 @@ public class SkuTest extends Html5PageTest {
                 .goto_GoodsDetails()
                 .goto_CartPage()
                 .modifyNumber(name,num)
-                .verify_Goods(name,num)
         ;
     }
     /*
@@ -222,7 +221,7 @@ public class SkuTest extends Html5PageTest {
         String addTel = inputData.getProperty("addressTel");
         String name = inputData.getProperty("addressName");
         pageFacade.gotoPage(HomePage.class)
-                .gotoLoginPage()
+                .homePageLogin()
                 .login_homePage(tel,pwd)
                 .click_more()
                 .clickAddressBtn()
@@ -254,7 +253,7 @@ public class SkuTest extends Html5PageTest {
         String addTel = inputData.getProperty("addressExportTel");
         String name = inputData.getProperty("addressExportName");
         pageFacade.gotoPage(HomePage.class)
-                .gotoLoginPage()
+                .homePageLogin()
                 .login_homePage(tel,pwd)
                 .click_more()
                 .clickAddressBtn()
@@ -281,7 +280,7 @@ public class SkuTest extends Html5PageTest {
         String tel = inputData.getProperty("telephone");
         String pwd = inputData.getProperty("pwd");
         pageFacade.gotoPage(HomePage.class)
-                .click_cart_login()
+                .homePageLogin()
                 .login_homePage(tel,pwd)
                 .click_more()
                 .logout();
@@ -297,15 +296,17 @@ public class SkuTest extends Html5PageTest {
         进入购物车页面
         使用货到付款
         提交订单
+        获取成功页订单号
+        根据订单号搜索订单
         取消订单
     */
     @Test(priority = 10)
-    public void cancelOrder(){
+    public void cancelOrderTest(){
         logger.info("*************************** cancelOrder start");
         String tel = inputData.getProperty("telephone");
         String pwd = inputData.getProperty("pwd");
         String queryString = inputData.getProperty("productName1");
-        pageFacade.gotoPage(HomePage.class)
+        OrderSuccessPage page = pageFacade.gotoPage(HomePage.class)
                 .home_search()
                 .search(queryString)
                 .check_result(queryString)
@@ -317,13 +318,16 @@ public class SkuTest extends Html5PageTest {
                 .click_cart()
                 .select_PayOnDelivery()
                 .submitOrderByOnDeliveryPay()
-                .backOrderList()
-                .clickSearch()
-                .searchOrder("")
-                .cancelOrder()
-                ;
-    }
+                .getOrder();
 
+        String orderId= page.getOrderNo();
+
+        page.backOrderList()
+                .clickSearch()
+                .searchOrder(orderId)
+                .cancelSearchOrderResult()
+        ;
+    }
 
 
     /**
