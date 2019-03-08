@@ -15,6 +15,13 @@ public class MorePage extends Html5Page {
      */
     @FindBy(id="user:address-btn")
     private WebElement addressBtn;
+
+    /*
+       退出按钮
+     */
+    @FindBy(id = "btn:log-out")
+    private WebElement logoutBtn;
+
     /**
      * 退出登录
      *
@@ -22,9 +29,8 @@ public class MorePage extends Html5Page {
      */
     public HomePage logout() {
         sleepInMillTime(2000);
-        swipeUp(1000);
-        WebElement el = driver.findElementByClassName("user-footer");
-        el.findElement(By.tagName("a")).click();
+        swipeUp(500);
+        wait(logoutBtn).click();
         return gotoPage(HomePage.class);
     }
 

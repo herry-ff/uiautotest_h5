@@ -20,6 +20,11 @@ public class AddressPage extends Html5Page {
     @FindBy(id = "add-address-btn")
     private WebElement addAddressBtn;
 
+    /**
+     * 删除按钮
+     */
+    @FindBy(id = "address:edit-delete")
+    private WebElement delAddressBtn;
 
 
     /**
@@ -55,13 +60,14 @@ public class AddressPage extends Html5Page {
      */
 
    public AddressPage delAddress(String name){
+       driver.context("CHROMIUM");
        List<WebElement> addressList = driver.findElements(By.className("addr-list-item"));
        for (WebElement i : addressList) {
            WebElement els=i.findElement(By.className("addr-info-main"));
-           WebElement elsOne=i.findElement(By.className("addr-info-operate"));
-           WebElement elsTwo=elsOne.findElement(By.className("qIcon qIcon-delete"));
-           if (els.getTagName().equals(name))
-               clickByNativeWebViewPosition(wait(elsTwo));
+           if (els.getText().contains(name))
+               wait(delAddressBtn).click();
+               List<WebElement> a= driver.findElements(By.className("am-modal-button"));
+               a.get(1).click();
            break;
        }
        return this;

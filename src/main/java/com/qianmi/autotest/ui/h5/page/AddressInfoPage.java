@@ -41,18 +41,19 @@ public class AddressInfoPage extends Html5Page {
 
   public AddressInfoPage clickAnalysis(){
 
-    wait(address_analysis).click();
-
     driver.context("CHROMIUM");
     WebElement el = driver.findElementByClassName("address-title");
     Actions actions = new Actions(driver);
     actions.moveToElement(el).click().perform();
 
+    clickNativeElement(address_analysis);
 
     return gotoPage(AddressInfoPage.class);
   }
 
   public AddressInfoPage inputAnalysisAddress(String text){
+    swipeUp(500);
+    driver.context("CHROMIUM");
     wait(address_textarea).sendKeys(text);
     return gotoPage(AddressInfoPage.class);
   }
@@ -72,7 +73,8 @@ public class AddressInfoPage extends Html5Page {
    * @return 当前页面
      */
   public AddressInfoPage clickExportAddress(){
-    clickByNativeWebViewPosition(wait(export_address));
+    swipeUp(500);
+    clickNativeElement(wait(export_address));
     return gotoPage(AddressInfoPage.class);
   }
 }
