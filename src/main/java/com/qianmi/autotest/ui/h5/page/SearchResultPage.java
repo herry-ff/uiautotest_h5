@@ -17,10 +17,11 @@ import java.util.List;
 public class SearchResultPage extends Html5Page {
 
     /*
-     搜索结果页第一行元素区域
+    小购物车图标
      */
-//    @FindBy(id = "goods-undefined")
-//    private WebElement result_goods_area;
+    @FindBy(className = "back-top,listview-cart")
+    private WebElement littleCartBtn;
+
     /*
      搜索结果页第一行元素名称
      */
@@ -37,12 +38,6 @@ public class SearchResultPage extends Html5Page {
     */
     @FindBy(id = "goods-list:goods-img-0-btn")
     private WebElement result_goods_pic;
-    /**
-     * 悬浮小购物车图标
-     */
-//    @FindBy(className = "qIcon qIcon-cart1")
-    @FindBy(xpath = "//div[@class=\"goods-search\"]//a[@class=\"back-top listview-cart\"]//i[@class=\"qIcon qIcon-cart1\"]")
-    private WebElement cart_button;
 
 
     /**
@@ -57,12 +52,6 @@ public class SearchResultPage extends Html5Page {
         throw new AutotestException("搜索结果为:" + actual_goods_name + "\n");
     }
 
-    /*
-    返回首页
-     */
-    public HomePage return_homePage() {
-        return gotoPage(HomePage.class);
-    }
 
     /*
        点击结果页第一行商品的购物车图标加入购物车
@@ -100,8 +89,9 @@ public class SearchResultPage extends Html5Page {
      */
     public CartPage goto_CartPage() {
 
-        sleepInMillTime(2000);
-        wait(cart_button).click();
+       sleepInMillTime(1000);
+
+        clickByNativeWebViewPosition(littleCartBtn);
         return gotoPage(CartPage.class);
     }
 

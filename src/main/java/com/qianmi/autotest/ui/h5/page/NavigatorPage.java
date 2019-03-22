@@ -88,17 +88,10 @@ public abstract class NavigatorPage extends Html5Page {
      * 跳转采购车
      */
     public CartPage gotoCartPage(){
-        Set<String> contextNames=driver.getContextHandles();
-        sleepInMillTime(3000);
-        for(String context : contextNames){
-            System.out.println(context);
-            if (context.contains("NATIVE_APP")) {
-                driver.context(context);
-                cartButton.click();
-                break;
-            }
+        sleepInMillTime(2000);
+        driver.context("NATIVE_APP");
+        cartButton.click();
 
-        }
         return gotoPage(CartPage.class);
     }
 

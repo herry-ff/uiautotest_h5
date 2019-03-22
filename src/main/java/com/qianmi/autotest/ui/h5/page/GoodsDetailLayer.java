@@ -39,19 +39,8 @@ public class GoodsDetailLayer extends Html5Page {
         Actions actions = new Actions(driver);
         actions.moveToElement(el).click().perform();
 
-        Set<String> contextNames=driver.getContextHandles();
-
-
-        for(String context : contextNames) {
-            System.out.println(context);
-            if (context.contains("NATIVE_APP")) {
-                driver.context(context);
-                System.out.print(context);
-                confirmAddCart.click();
-                break;
-            }
-        }
-
+        driver.context("NATIVE_APP");
+        confirmAddCart.click();
 
         return gotoPage(GoodsDetails.class);
     }

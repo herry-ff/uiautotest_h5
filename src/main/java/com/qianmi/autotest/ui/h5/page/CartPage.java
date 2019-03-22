@@ -49,10 +49,11 @@ public class CartPage extends Html5Page {
     private WebElement inputNumber;
 
     public CartPage deleteGoods() {
-        sleep(1000);
-        wait(editDeleteBtn).click();
-        wait(allSelectBtn).click();
-        wait(deleteBtn).click();
+        sleepInMillTime(1000);
+        driver.context("CHROMIUM");
+        clickByNativeWebViewPosition(editDeleteBtn);
+        clickByNativeWebViewPosition(allSelectBtn);
+        clickByNativeWebViewPosition(deleteBtn);
         List<WebElement> els = driver.findElementsByClassName("am-modal-button");
         els.get(1).click();
         return this;
@@ -79,8 +80,9 @@ public class CartPage extends Html5Page {
                     System.out.println("购物车商品数量正确，值为:" + inputNumber.getAttribute("value"));
                     break;
                 }
-                System.out.println("购物车数量不正确，值为" + inputNumber.getText());
+                System.out.println("购物车数量不正确，值为" + inputNumber.getAttribute("value"));
             }
+            System.out.println("购物车数量不正确，值为" + inputNumber.getAttribute("value"));
         }
         return this;
     }
@@ -121,9 +123,8 @@ public class CartPage extends Html5Page {
 
     public CartPage modifyNumber(String name, String num) {
 
-        sleepInMillTime(2000);
+        sleepInMillTime(1000);
         driver.context("CHROMIUM");
-//        System.out.println("当前上下文"+driver.getContext());
 
         List<WebElement> els = driver.findElementsByClassName("cart-main");
         for (WebElement i : els) {
@@ -159,7 +160,7 @@ public class CartPage extends Html5Page {
                     System.out.println("大小单位换算正确:" + i.findElements(By.className("text-right")).get(0).getText());
                 break;
             }
-            System.out.println("大小单位换算错误" + i.findElements(By.className("text-right")).get(0).getText());
+            System.out.println("大小单位换算错误:" + i.findElements(By.className("text-right")).get(0).getText());
 
         }
         return this;

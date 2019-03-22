@@ -75,7 +75,8 @@ public class SkuTest extends Html5PageTest {
                 .goto_layer()
                 .inputDecimalAddCart(num)
                 .goto_CartPage()
-                .modifyNumber(queryString,num)
+                .verify_Goods(queryString,num)
+                .deleteGoods()
         ;
     }
 
@@ -108,6 +109,7 @@ public class SkuTest extends Html5PageTest {
                 .inputDecimalAddCart(num)
                 .goto_CartPage()
                 .verify_Goods(queryString,num)
+                .deleteGoods()
         ;
     }
  /*
@@ -138,7 +140,9 @@ public class SkuTest extends Html5PageTest {
                 .goto_GoodsDetails()
                 .goto_CartPage()
                 .modifyNumber(name,num)
-                .verify_Goods_unit(name,unit);
+                .verify_Goods_unit(name,unit)
+                .deleteGoods()
+        ;
     }
 
      /*
@@ -165,9 +169,9 @@ public class SkuTest extends Html5PageTest {
                 .add_goods_cart_login()
                 .login_goto_searchResultPage(telephone, pwd)
                 .add_goods_cart()
-                .goto_GoodsDetails()
                 .goto_CartPage()
                 .modifyNumber(name,num)
+                .deleteGoods()
         ;
     }
     /*
@@ -207,7 +211,7 @@ public class SkuTest extends Html5PageTest {
           点击更多
           点击收货地址
           点击新增收货地址
-          智能解析输入:zoey,15195862767,江苏省南京市雨花台区软件大道118号
+          智能解析输入:王想,15195862767,江苏省南京市雨花台区软件大道118号
           点击保存收货地址
           返回，校验收货地址列表存在新增的地址
 
@@ -231,7 +235,6 @@ public class SkuTest extends Html5PageTest {
                 .clickSaveAddress()
                 .verifyAddressExist(addTel)
                 .delAddress(name)
-                .confirmDeleteAddress()
                 ;
     }
 
@@ -262,7 +265,6 @@ public class SkuTest extends Html5PageTest {
                 .clickSaveAddress()
                 .verifyAddressExist(addTel)
                 .delAddress(name)
-                .confirmDeleteAddress()
                 ;
     }
 

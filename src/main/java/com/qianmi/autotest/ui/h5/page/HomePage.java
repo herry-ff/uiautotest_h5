@@ -33,16 +33,4 @@ public class HomePage extends NavigatorPage{
     }
 
 
-    /*
-   已登录
-   点击购物车图标
-   进入购物车页面
-    */
-   public CartPage click_cartBtn(){
-       sleepInMillTime(1000);
-
-       clickByNativeWebViewPosition(wait(cartButton));
-       return gotoPage(CartPage.class);
-   }
-
 }

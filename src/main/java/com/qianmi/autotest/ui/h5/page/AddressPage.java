@@ -13,17 +13,16 @@ import java.util.List;
 public class AddressPage extends Html5Page {
 
 
-
     /**
      * 新增收货地址按钮
-      */
+     */
     @FindBy(id = "add-address-btn")
     private WebElement addAddressBtn;
 
     /**
      * 删除按钮
      */
-    @FindBy(id = "address:edit-delete")
+    @FindBy(className = "qIcon,qIcon-delete")
     private WebElement delAddressBtn;
 
 
@@ -31,7 +30,7 @@ public class AddressPage extends Html5Page {
      * 点击新增收货地址按钮
      * 跳转填写收货地址页面
      */
-    public AddressInfoPage click_add_Address(){
+    public AddressInfoPage click_add_Address() {
         sleepInMillTime(1000);
         wait(addAddressBtn).click();
         return gotoPage(AddressInfoPage.class);
@@ -39,15 +38,20 @@ public class AddressPage extends Html5Page {
 
     /**
      * 校验收货地址list中存在新增的收货地址
+     *
      * @return
      */
-    public AddressPage verifyAddressExist(String tel){
+    public AddressPage verifyAddressExist(String tel) {
+        sleepInMillTime(1000);
+        driver.context("CHROMIUM");
         List<WebElement> addressList = driver.findElements(By.className("addr-list-item"));
         for (WebElement i : addressList) {
-            WebElement els=i.findElement(By.className("addr-info-main"));
-            if (els.getTagName().equals(tel))
-                System.out.print("校验通过");
-            break;
+            WebElement els = i.findElement(By.className("addr-info-main"));
+            if (els.getText().contains(tel)) {
+                System.out.print("添加收货地址成功："+els.getText());
+                break;
+            }
+            System.out.print("添加收货地址失败："+i.getText());
         }
         return this;
     }
@@ -55,39 +59,29 @@ public class AddressPage extends Html5Page {
     /**
      * 找到现在的手机号的收货地址
      * 然后执行删除操作
+     *
      * @param name
      * @return
      */
 
-   public AddressPage delAddress(String name){
-       driver.context("CHROMIUM");
-       List<WebElement> addressList = driver.findElements(By.className("addr-list-item"));
-       for (WebElement i : addressList) {
-           WebElement els=i.findElement(By.className("addr-info-main"));
-           if (els.getText().contains(name))
-               wait(delAddressBtn).click();
-               List<WebElement> a= driver.findElements(By.className("am-modal-button"));
-               a.get(1).click();
-           break;
-       }
-       return this;
-   }
-
-
-    /**
-     * 点击删除确认弹窗中的确定按钮
-     * @return
-     */
-    public AddressPage confirmDeleteAddress(){
+    public AddressPage delAddress(String name) {
         sleepInMillTime(1000);
-        List<WebElement> els = driver.findElementsByClassName("am-modal-button");
-        for(WebElement i : els){
-            if(i.getText().equals("确定")){
-                i.click();
+        driver.context("CHROMIUM");
+        List<WebElement> addressList = driver.findElements(By.className("addr-list-item"));
+        for (WebElement i : addressList) {
+            WebElement els = i.findElement(By.className("addr-info-main"));
+            List<WebElement> buttons = i.findElement(By.className("addr-info-operate")).findElements(By.tagName("div"));
+            if (els.getText().contains(name)) {
+                sleepInMillTime(1000);
+                buttons.get(1).click();
+                List<WebElement> a = driver.findElements(By.className("am-modal-button"));
+                a.get(1).click();
                 break;
             }
-        }
 
-        return gotoPage(AddressPage.class);
+        }
+        return this;
     }
+
+
 }
