@@ -32,6 +32,7 @@ public class MorePage extends Html5Page {
         swipeUp(500);
         driver.context("CHROMIUM");
         clickNativeElement(logoutBtn);
+        sleep();
         return gotoPage(HomePage.class);
     }
 
