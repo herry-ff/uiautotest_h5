@@ -58,6 +58,13 @@ public class AddressInfoPage extends Html5Page {
     return gotoPage(AddressInfoPage.class);
   }
 
+
+  public AddressInfoPage inputAddress(String text){
+    driver.context("CHROMIUM");
+    wait(address_textarea).sendKeys(text);
+    swipeUp(1000);
+    return gotoPage(AddressInfoPage.class);
+  }
   /**
    *点击保存收货地址按钮
    * 返回收货地址页面
@@ -73,7 +80,8 @@ public class AddressInfoPage extends Html5Page {
    * @return 当前页面
      */
   public AddressInfoPage clickExportAddress(){
-    swipeUp(500);
+    swipeUp(1000);
+    swipeUp(1000);
     clickNativeElement(wait(export_address));
     return gotoPage(AddressInfoPage.class);
   }
