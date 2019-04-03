@@ -51,12 +51,9 @@ public class SearchOrderPage extends OrderSuccessPage {
 
     public OrderPage cancelSearchOrderResult(){
 
-        sleepInMillTime(2000);
-
-//        driver.findElement(By.id("qm-operations:cancel-btn")).click();
+        sleepInMillTime(3000);
        WebElement cancelBtn = driver.findElement(By.id("qm-operations:cancel-btn"));
-//        new TouchActions(driver).singleTap(cancelBtn).perform();
-        clickByNativeWebViewPosition(cancelBtn);
+        clickByNativeWebViewPosition(wait(cancelBtn));
 
 
         return gotoPage(OrderPage.class);

@@ -48,6 +48,17 @@ public class CartPage extends Html5Page {
     @FindBy(id = "goods-number-input")
     private WebElement inputNumber;
 
+    /*
+    继续逛逛
+     */
+    @FindBy(id="shopping-cart:buy-again-btn")
+    private WebElement buyAgainBtn;
+
+    public HomePage buyAgain(){
+        driver.context("CHROMIUM");
+        clickByNativeWebViewPosition(buyAgainBtn);
+        return gotoPage(HomePage.class);
+    }
     public CartPage deleteGoods() {
         sleepInMillTime(1000);
         driver.context("CHROMIUM");
@@ -165,5 +176,8 @@ public class CartPage extends Html5Page {
         }
         return this;
     }
+
+
+
 }
 

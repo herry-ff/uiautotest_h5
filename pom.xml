@@ -33,10 +33,11 @@
         </dependency>
 
         <!--<dependency>-->
-            <!--<groupId>org.testng</groupId>-->
-            <!--<artifactId>testng</artifactId>-->
-            <!--<version>6.9.10</version>-->
+            <!--<groupId>io.appium</groupId>-->
+            <!--<artifactId>java-client</artifactId>-->
+            <!--<version>7.0.0</version>-->
         <!--</dependency>-->
+
 
     </dependencies>
 

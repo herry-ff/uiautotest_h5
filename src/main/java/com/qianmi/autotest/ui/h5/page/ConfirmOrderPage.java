@@ -68,6 +68,7 @@ public class ConfirmOrderPage extends Html5Page {
         public OrderSuccessPage submitOrderByOnDeliveryPay () {
             swipeUp(1000);
             sleepInMillTime(2000);
+//            driver.context("CHROMIUM");
             clickNativeElement(wait(confirmButton));
             return gotoPage(OrderSuccessPage.class);
         }

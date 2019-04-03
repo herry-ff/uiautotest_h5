@@ -54,10 +54,10 @@ public class OrderPage extends Html5Page {
     public OrderDetailPage orderDetail(){
 
         sleepInMillTime(2000);
-        List<WebElement> orders = driver.findElements(By.className("order-list-content"));
-        WebElement el = orders.get(0);
-        WebElement el2 = el.findElement(By.className("goods-img-item"));
-        clickByNativeWebViewPosition(el2);
+        driver.context("CHROMIUM");
+        List<WebElement> pics = driver.findElements(By.className("goods-img-item"));
+        System.out.println(pics.get(0));
+        pics.get(0).click();
        return gotoPage(OrderDetailPage.class);
     }
 

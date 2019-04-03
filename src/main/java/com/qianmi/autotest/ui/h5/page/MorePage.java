@@ -19,7 +19,7 @@ public class MorePage extends Html5Page {
     /*
        退出按钮
      */
-    @FindBy(id = "btn:log-out")
+    @FindBy(id="wx:logout-btn")
     private WebElement logoutBtn;
 
     /**
@@ -30,7 +30,8 @@ public class MorePage extends Html5Page {
     public HomePage logout() {
         sleepInMillTime(2000);
         swipeUp(500);
-        wait(logoutBtn).click();
+        driver.context("CHROMIUM");
+        clickNativeElement(logoutBtn);
         return gotoPage(HomePage.class);
     }
 
@@ -41,4 +42,11 @@ public class MorePage extends Html5Page {
        wait(addressBtn).click();
        return gotoPage(AddressPage.class);
    }
+
+    public AddressPage clickAddAddressBtn(){
+
+        sleepInMillTime(1000);
+        wait(addressBtn).click();
+        return gotoPage(AddressPage.class);
+    }
 }

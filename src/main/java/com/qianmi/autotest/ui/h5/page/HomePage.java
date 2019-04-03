@@ -26,8 +26,8 @@ public class HomePage extends NavigatorPage{
      * 点击搜索框进入搜索页面
      */
     public HomeSearchPage home_search() {
-        sleepInMillTime(1000);
-        swipeUp(2000);
+        sleepInMillTime(3000);
+        swipeUp(500);
         wait(searchInput).click();
         return gotoPage(HomeSearchPage.class);
     }
